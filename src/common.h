@@ -17,6 +17,16 @@
 
 using namespace std;
 
+#define PROBLEM(PREFIX, TEXT)				\
+  cout << PREFIX << ": " << __FILE__ << " " << __LINE__ << TEXT << endl;
+
+#define NYI(TEXT) PROBLEM("NYI", TEXT)
+#define NFI(TEXT) PROBLEM("NFI", TEXT)
+#define FAIL(TEXT) PROBLEM("FAIL", TEXT)
+
+#define SHOWVARVAL(VAR) \
+  cout << "SHOWVAR " << __FILE__ << ":" << __LINE__ << "  " # VAR << ": " << VAR << endl;
+
 typedef vector<string> Strings;
 
 #define DECLARE_MAP_GETVALUE(MAP_TYPE, KEY_TYPE, VALUE_TYPE)	\
