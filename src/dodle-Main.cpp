@@ -4,6 +4,14 @@
 
 #include "common.h"
 
+void help()
+{
+  cout << "Help:" << endl;
+  cout << "  init" << endl;
+  cout << "  play" << endl;
+  cout << "  reset" << endl;
+}
+
 
 int main(int argc, const char* argv[])
 {
