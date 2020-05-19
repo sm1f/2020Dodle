@@ -13,8 +13,7 @@ class CppBase
  public:
   CppBase() {}
   virtual ~CppBase() {}
-  virtual string className();
-
+  virtual string className() { return "CppBase"; }
 };
 
 

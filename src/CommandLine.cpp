@@ -5,15 +5,10 @@
 #include "CommandLine.h"
 
 CommandLine::CommandLine()
-  : CppBase()
+  : CppBase(),
+    m_noCommandAction(NULL)
 {
 }
-
-string CommandLine::className()
-{
-  return "CommandLine";
-}
-
 
 void CommandLine::help()
 {
@@ -26,8 +21,31 @@ void CommandLine::help()
 
 bool CommandLine::parse(int argc, const char* argv[])
 {
-  SHOWVARVAL(argc);
+  if (argc < 2) {
+    applyIfNotNull(m_noCommandAction);
+  } else {
+    SHOWVARVAL(argc);
+  }
+  
   return false;
 }
 
+bool CommandLine::applyIfNotNull(Action* action)
+{
+  if (action != NULL) {
+    action->apply();
+    return true;
+  }
+  return false;
+}
 
+void CommandLine::addNoCommandAction(Action* action)
+{
+  m_noCommandAction = action;
+}
+
+
+CommandLine_PrintHelpAction::CommandLine_PrintHelpAction(CommandLine* cLine)
+  : m_cLine(cLine)
+{
+}

@@ -4,9 +4,4 @@
 
 #include "CppBase.h"
 
-string CppBase::className()
-{
-  return "CppBase";
-}
-
 

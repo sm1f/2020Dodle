@@ -16,9 +16,3 @@ Zz::Zz()
 {
 }
 
-string Zz::className()
-{
-  return "Zz";
-}
-
-

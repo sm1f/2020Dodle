@@ -7,7 +7,7 @@
 int main(int argc, const char* argv[])
 {
   
-  cout << "dodle V0.0" << endl;
+  cout << "dodle V0.1" << endl;
   Dodle* that = new Dodle();
   int result = that->setupAndRun(argc, argv);
 

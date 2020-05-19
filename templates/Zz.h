@@ -20,7 +20,7 @@ class Zz : public Yy
  public:
   Zz();
   virtual ~Zz() {}
-  virtual string className();
+  virtual string className() { return "Zz"; }
  private:
   typedef Yy __super;
 };
