@@ -2,46 +2,7 @@
 // All rights reserved.
 
 
-#include "common.h"
-
-#if 0
-class CommandLine {
-public:
-  CommandLine() {}
-  virtual ~CommandLine() {}
-
-  virtual void help();
-  virtual bool parse(int argc, const char* argv[]);
-};
-#endif // 0
-
-class Dodle {
-  public:
-  Dodle() {}
-  virtual ~Dodle() {}
-
-  virtual bool setup();
-
-  virtual int setupAndRun(int argc, const char* argv[]);
-};
-
-bool Dodle::setup()
-{
-  NYI("");
-  return false;
-}
-
-int Dodle::setupAndRun(int argc, const char* argv[])
-{
-  SHOWVARVAL(argc);
-  if (! setup()) {
-    FAIL("");
-  } else {
-    NFI("");
-  }
-  return -1;
-}
-
+#include "Dodle.h"
 
 int main(int argc, const char* argv[])
 {
