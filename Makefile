@@ -23,7 +23,8 @@ PRD_OBJ_NON_MAINS:= $(filter-out $(PRD_OBJ_MAINS), $(PRD_OBJ_ALL))
 DBG_APP_ALL:= $(SRC_MAINS:$(SRC_DIR)/%-Main.cpp=$(DBG_APP_DIR)/%.exe)
 PRD_APP_ALL:= $(SRC_MAINS:$(SRC_DIR)/%-Main.cpp=$(PRD_APP_DIR)/%.exe)
 
-all: DBG_all PRD_all
+#all: DBG_all PRD_all
+all: PRD_all
 
 
 DBG_all: MK_DBG_OBJ_DIR MK_DBG_APP_DIR $(DBG_OBJ_ALL) $(DBG_APP_ALL)
@@ -63,7 +64,8 @@ $(PRD_APP_DIR)/%.exe: $(PRD_OBJ_ALL) | MK_DBG_APP_DIR
 .PRECIOUS: $(PRD_OBJ_DIR)/%.o
 
 .PHONY: clean
-clean: DBG_clean PRD_clean cleanSrc
+clean: PRD_clean cleanSrc
+#clean: DBG_clean PRD_clean cleanSrc
 
 DBG_clean:
 	rm -f $(DEPS) $(DBG_OBJ_DIR)/*.d $(DBG_OBJ_DIR)/*.o $(DBG_APP_DIR)/*

@@ -4,7 +4,7 @@
 
 #include "common.h"
 
-
+#if 0
 class CommandLine {
 public:
   CommandLine() {}
@@ -13,21 +13,7 @@ public:
   virtual void help();
   virtual bool parse(int argc, const char* argv[]);
 };
-
-void CommandLine::help()
-{
-  cout << "Help:" << endl;
-  cout << "  help: print command info" << endl;
-  cout << "  init: initial an empty game" << endl;
-  cout << "  play: continue play" << endl;
-  cout << "  reset: reset to empty game." << endl;
-}
-
-bool CommandLine::parse(int argc, const char* argv[])
-{
-  SHOWVARVAL(argc);
-  return false;
-}
+#endif // 0
 
 class Dodle {
   public:
