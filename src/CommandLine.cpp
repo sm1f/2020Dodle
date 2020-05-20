@@ -20,6 +20,50 @@ void CommandLine::help()
   }
 }
 
+
+bool CommandLine::parseStartingAt(int pos, int argc, const char* argv[])
+{
+  if (pos < 1) {
+    FAIL("can not parse before pos 1");
+  } else if (pos >= argc) {
+    return true; // parsed all
+  }
+
+  const char* argAtPos = argv[pos];
+  string currentArg = argAtPos;
+  const char argAtPos0 = argAtPos[0];
+
+  if (argAtPos0 != '-') {
+    size_t count = m_commandStrings.size();
+    for (size_t i = 0; i < count; i++)
+      {
+	string curString = m_commandStrings[i];
+	cout << "AAAAAAAAA " << curString << endl;
+	if (curString == currentArg) {
+	  cout << "BBBBBBB " << currentArg << endl;
+	  applyIfNotNull(m_commandActions[i], curString);
+	}
+      }
+    
+  } else {
+  }
+
+
+  NYI("");
+  SHOWVARVAL(argAtPos);
+  
+  
+  const char* arg0 = argv[0];
+  SHOWVARVAL(arg0);
+  const char arg00 = arg0[0];
+  SHOWVARVAL(arg00);
+  
+  
+  SHOWVARVAL(pos);
+  SHOWVARVAL(argc);
+  return false;
+}
+
 bool CommandLine::parse(int argc, const char* argv[])
 {
   if (m_noCommandAction == NULL) {
@@ -27,18 +71,21 @@ bool CommandLine::parse(int argc, const char* argv[])
   }
   
   if (argc < 2) {
-    applyIfNotNull(m_noCommandAction);
+    applyIfNotNull(m_noCommandAction, " noCommandAction");
+  } else if (! parseStartingAt(1, argc, argv)) {
+    FAIL("parseStartingAt");
   } else {
-    SHOWVARVAL(argc);
-    NYI("");
+    return true;
   }
   
   return false;
 }
 
-bool CommandLine::applyIfNotNull(CommandLineAction* action)
+bool CommandLine::applyIfNotNull(CommandLineAction* action, string calledFrom)
 {
-  if (action != NULL) {
+  if (action == NULL) {
+    FAIL("called From: " << calledFrom);
+  } else {
     action->apply();
     return true;
   }

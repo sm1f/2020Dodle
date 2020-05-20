@@ -22,7 +22,7 @@ class CommandLine : public CppBase
   virtual void help();
   virtual bool parse(int argc, const char* argv[]);
 
-  virtual bool applyIfNotNull(CommandLineAction* action);
+  virtual bool applyIfNotNull(CommandLineAction* action, string calledFrom);
   virtual void addNoCommandAction(CommandLineAction* action);
   virtual void addCommand(string commandString, string commandDescription, CommandLineAction* act);
 
@@ -33,6 +33,8 @@ class CommandLine : public CppBase
   vector<string> m_commandStrings;
   vector<string> m_commandDescriptions;
   vector<CommandLineActionP> m_commandActions;
+
+  bool parseStartingAt(int pos, int argc, const char* argv[]);
 };
 
 class CommandLineAction : public Action
