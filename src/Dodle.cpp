@@ -40,7 +40,7 @@ bool Dodle::setup()
   if (! setup_commandLine()) {
     FAIL("");
   } else {
-    NYI("");
+    //    NYI("");
     return true;
   }
   return false;
@@ -49,7 +49,6 @@ bool Dodle::setup()
 bool Dodle::setup_commandLine()
 {
   m_commandLine = DodleCommandLine::create(this);
-  NFI("");
   return true;
 }
 

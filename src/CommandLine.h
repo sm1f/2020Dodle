@@ -11,6 +11,7 @@
 #include "Action.h"
 
 class CommandLineAction;
+typedef CommandLineAction* CommandLineActionP;
 
 class CommandLine : public CppBase
 {
@@ -29,6 +30,9 @@ class CommandLine : public CppBase
   typedef CppBase __super;
 
   CommandLineAction* m_noCommandAction;
+  vector<string> m_commandStrings;
+  vector<string> m_commandDescriptions;
+  vector<CommandLineActionP> m_commandActions;
 };
 
 class CommandLineAction : public Action
@@ -40,6 +44,15 @@ class CommandLineAction : public Action
   typedef Action __super;
   string m_commandString;
   string m_commandDesciption;
+};
+
+class CommandLineAction_setBool : public CommandLineAction
+{
+  CommandLineAction_setBool(string commandString, string commandDescription, bool& var);
+  virtual ~CommandLineAction_setBool() {}
+ private:
+  typedef CommandLineAction __super;
+  bool& m_var;
 };
 
 
