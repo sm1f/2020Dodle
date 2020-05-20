@@ -12,8 +12,13 @@ DodleCommandLine::DodleCommandLine()
 DodleCommandLine* DodleCommandLine::create(Dodle* that)
 {
   DodleCommandLine* result = new DodleCommandLine();
-  result->addNoCommandAction(new CommandLine_PrintHelpAction(result));
-  NYI("");
+
+  result->addNoCommandAction(new CommandLine_PrintHelpAction("help", "print command info", result));
+  result->addCommand("help", "print command info", NULL);
+  result->addCommand("init", "initial an empty game", NULL);
+  result->addCommand("play", "continue play", NULL);
+  result->addCommand("reset", "reset to empty game", NULL);
+
   return result;
 }
 
@@ -44,14 +49,18 @@ bool Dodle::setup()
 bool Dodle::setup_commandLine()
 {
   m_commandLine = DodleCommandLine::create(this);
+  NFI("");
   return true;
 }
 
 int Dodle::setupAndRun(int argc, const char* argv[])
 {
-  SHOWVARVAL(argc);
   if (! setup()) {
-    FAIL("");
+    FAIL("setup");
+  } else if (! setup_commandLine()) {
+    FAIL("setup_commandLine");
+  } else if (m_commandLine->parse(argc, argv)) {
+    FAIL("parse");
   } else {
     NFI("");
   }

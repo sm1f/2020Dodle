@@ -12,6 +12,7 @@ CommandLine::CommandLine()
 
 void CommandLine::help()
 {
+  NYI("");
   cout << "Help:" << endl;
   cout << "  help: print command info" << endl;
   cout << "  init: initial an empty game" << endl;
@@ -25,12 +26,13 @@ bool CommandLine::parse(int argc, const char* argv[])
     applyIfNotNull(m_noCommandAction);
   } else {
     SHOWVARVAL(argc);
+    NYI("");
   }
   
   return false;
 }
 
-bool CommandLine::applyIfNotNull(Action* action)
+bool CommandLine::applyIfNotNull(CommandLineAction* action)
 {
   if (action != NULL) {
     action->apply();
@@ -39,13 +41,22 @@ bool CommandLine::applyIfNotNull(Action* action)
   return false;
 }
 
-void CommandLine::addNoCommandAction(Action* action)
+void CommandLine::addNoCommandAction(CommandLineAction* action)
 {
   m_noCommandAction = action;
 }
 
+void CommandLine::addCommand(string commandString, string commandDescription, CommandLineAction* act)
+{
+  NYI("");
+}
 
-CommandLine_PrintHelpAction::CommandLine_PrintHelpAction(CommandLine* cLine)
-  : m_cLine(cLine)
+CommandLineAction::CommandLineAction(string commandString, string commandDescription)
+  : __super(), m_commandString(commandString), m_commandDesciption(commandDescription)
+{
+}
+
+CommandLine_PrintHelpAction::CommandLine_PrintHelpAction(string commandString, string commandDescription, CommandLine* cLine)
+  : __super(commandString, commandDescription), m_cLine(cLine)
 {
 }

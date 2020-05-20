@@ -5,8 +5,12 @@
 #ifndef  __COMMANDLINE_H__
 #define __COMMANDLINE_H__
 
+#include <map>
+
 #include "CppBase.h"
 #include "Action.h"
+
+class CommandLineAction;
 
 class CommandLine : public CppBase
 {
@@ -17,23 +21,36 @@ class CommandLine : public CppBase
   virtual void help();
   virtual bool parse(int argc, const char* argv[]);
 
-  virtual bool applyIfNotNull(Action* action);
-  virtual void addNoCommandAction(Action* action);
+  virtual bool applyIfNotNull(CommandLineAction* action);
+  virtual void addNoCommandAction(CommandLineAction* action);
+  virtual void addCommand(string commandString, string commandDescription, CommandLineAction* act);
 
  private:
   typedef CppBase __super;
 
-  Action* m_noCommandAction;
+  CommandLineAction* m_noCommandAction;
 };
 
-class CommandLine_PrintHelpAction : public Action {
+class CommandLineAction : public Action
+{
  public:
-  CommandLine_PrintHelpAction(CommandLine* cLine);
+  CommandLineAction(string commandString, string commandDescription);
+  virtual ~CommandLineAction() {}
+ private:
+  typedef Action __super;
+  string m_commandString;
+  string m_commandDesciption;
+};
+
+
+class CommandLine_PrintHelpAction : public CommandLineAction {
+ public:
+  CommandLine_PrintHelpAction(string commandString, string commandDescription, CommandLine* cLine);
   virtual ~CommandLine_PrintHelpAction() {}
   virtual string className() { return "CommandLine_PrintHelpAction"; }
   virtual bool apply() { m_cLine->help(); return true; }
  private:
-  typedef CommandLine __super;
+  typedef CommandLineAction __super;
   CommandLine* m_cLine;
 };
 
